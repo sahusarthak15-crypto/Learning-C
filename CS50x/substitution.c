@@ -3,17 +3,31 @@
 
 int main()
 {
+    int index[26];
     char lowalpha[] = "abcdefghijklmnopqrstuvwxyz";
     char upalpha[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
 
-    char key[27*sizeof(char)];
+    char key[27];
     
     char ptxt[1000]; // plaintext (input)
     char ctxt[1000]; // ciphered text (output)
 
-    printf("Key? ");
-    scanf("%26s", key); // key input 
-    getchar();
+    for (; 1 ; )
+    {
+        printf("Key? ");
+        scanf("%26s", key); // key input 
+        getchar();
+        for (int j = 0; key != '\0'; j++)
+        {
+            if (isalpha(key[j]) == 0)
+            {
+                return;
+            }
+        }
+        for 
+    }
+
+    
     
     
     printf("Plain text: "); // lain text input 
@@ -57,7 +71,8 @@ int main()
         }
     }
     ctxt[i] = '\0';
-    printf("%s", ctxt);
+
+    printf("%s", ctxt);// output
     
     return 0;
 
