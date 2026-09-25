@@ -3,77 +3,110 @@
 
 int main()
 {
-    int index[26];
+    
     char lowalpha[] = "abcdefghijklmnopqrstuvwxyz";
     char upalpha[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
 
-    char key[27];
+    
+    
+    char key[27];       
     
     char ptxt[1000]; // plaintext (input)
     char ctxt[1000]; // ciphered text (output)
+    int j;
 
     for (; 1 ; )
+     
     {
+        int value[26] = {0};
         printf("Key? ");
         scanf("%26s", key); // key input 
         getchar();
-        for (int j = 0; key != '\0'; j++)
+        for ( j = 0; key[j] != '\0'; j++)
         {
             if (isalpha(key[j]) == 0)
             {
-                return;
+                break;
             }
+            else if (isupper(key[j]))
+            {
+                int index = key[j] - 'A';
+                if (value[index] == 1 )
+                {
+                    break;
+                }
+                value[index] = 1;
+            }
+            else if (islower(key[j]))
+            {
+                int index = key[j] - 'a';
+                if (value[index] == 1 )
+                {
+                    break;
+                }
+                value[index] = 1;
+            }
+            
+            
         }
-        for 
+
+        
+        if (j == 26)
+        {
+            break;
+        }
+        
     }
 
     
     
     
-    printf("Plain text: "); // lain text input 
+    printf("Plain text: "); // plain text input 
     scanf("%[^\n]", ptxt);
 
     // algorithm.
 
-    int i;
-    for (i = 0; ptxt[i] != '\0'; i++) 
-    {
-        if(isalpha(ptxt[i]))
+        int i;
+        for (i = 0; ptxt[i] != '\0'; i++) 
         {
-         
-            if (isupper(ptxt[i]))
-         
+            if(isalpha(ptxt[i]))
             {
-             for(int j = 0; upalpha[j] != '\0'; j++)
+            
+                if (isupper(ptxt[i]))
+            
                 {
-                    if ( ptxt[i] == upalpha[j])
-                   {
-                    ctxt[i] = key[j];
-                   }
+                for(int j = 0; upalpha[j] != '\0'; j++)
+                    {
+                        if ( ptxt[i] == upalpha[j] )
+                    {
+                        ctxt[i] = toupper(key[j]);
+                    }
+                   
+                    }
+            
                 }
+
+                else if (islower(ptxt[i]))
+            {
+                for(int j = 0; lowalpha[j] != '\0'; j++)
+                {
+                    if ( ptxt[i] == lowalpha[j] )
+                    {
+                        ctxt[i] = tolower(key[j]);
+                    }
+                    
+                }
+            }
+            }
+            else 
+            {
+                ctxt[i] = ptxt[i];
+            }
+        }
+        ctxt[i] = '\0';
+
+        printf("%s", ctxt);// output
         
-            }
+        return 0;
 
-            else if (islower(ptxt[i]))
-          {
-            for(int j = 0; lowalpha[j] != '\0'; j++)
-            {
-                if ( ptxt[i] == lowalpha[j])
-                {
-                    ctxt[i] = key[j];
-                }
-            }
-         }
-        }
-        else 
-        {
-            ctxt[i] = ptxt[i];
-        }
     }
-    ctxt[i] = '\0';
-
-    printf("%s", ctxt);// output
-    
-    return 0;
-
-}
